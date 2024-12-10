@@ -1,0 +1,20 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
+let fruits = [];
+
+app.post('/register', (req, res) => {
+    const { name, healthStatus, germinationDate, exportDate } = req.body;
+    fruits.push({ name, healthStatus, germinationDate, exportDate });
+    res.json({ message: 'Fruta registrada', fruits });
+});
+
+app.get('/fruits', (req, res) => {
+    res.json(fruits);
+});
+
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
